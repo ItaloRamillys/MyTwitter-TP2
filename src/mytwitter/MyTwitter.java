@@ -52,14 +52,16 @@ public class MyTwitter implements ITwitter{
             menu += "\n 0 - ENCERRAR NAVEGAÇÃO [X]";
             menu += "\n====================================";
             
-            int op = Integer.parseInt(JOptionPane.showInputDialog(null, menu));
+            String op = JOptionPane.showInputDialog(null, menu);
             
+            if(op == null) {
+                System.exit(0);
+            }
             
             switch(op){
-            
-                case 0:
-                    System.exit(0);
-                case 1: 
+	            case "0":
+	                System.exit(0);
+                case "1": 
                     
                     //String para o JOptionPane do cadastro de PessoaFisica
                     String texto_cpf = "[BEM VINDO A TELA DE CADASTRO]\n";
@@ -133,7 +135,7 @@ public class MyTwitter implements ITwitter{
                        JOptionPane.showMessageDialog(null, msg_return);
                     }    
                     break;
-                case 2:
+                case "2":
                     String msg_cancel = "";
                     msg_cancel += "[BEM VINDO A TELA DE CADASTRO]\n";
                     msg_cancel += "Digite o nome do usuario para cancelar o perfil: \n";
@@ -148,7 +150,7 @@ public class MyTwitter implements ITwitter{
                     
                     JOptionPane.showMessageDialog(null, "Perfil Cancelado");
                     break;
-                case 3:
+                case "3":
                     
                     String msg_tweetar_nome = "";
                     msg_tweetar_nome += "[BEM VINDO A TELA DE TWEETAR]\n";
@@ -170,7 +172,7 @@ public class MyTwitter implements ITwitter{
 
 
                     break;
-                case 4:
+                case "4":
                     String msg_timeline = "";
                     msg_timeline += "[BEM VINDO A TELA DA TIMELINE]\n";
                     msg_timeline += "Digite o nome do usuario: ";
@@ -192,7 +194,7 @@ public class MyTwitter implements ITwitter{
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                     break;
-                case 5:
+                case "5":
                     String msg_vis_tweet = "";
                     msg_vis_tweet += "[BEM VINDO A TELA DE TWEETS]\n";
                     msg_vis_tweet += "Digite o nome do usuario: ";
@@ -214,7 +216,7 @@ public class MyTwitter implements ITwitter{
                     }
                     
                     break;
-                case 6:
+                case "6":
                     String msg_fllw = "";
                     msg_fllw += "[BEM VINDO A TELA DE FOLLOWERS]\n";
                     msg_fllw += "Digite o nome do usuario seguidor:";
@@ -235,7 +237,7 @@ public class MyTwitter implements ITwitter{
                     }
                     
                     break;
-                case 7:
+                case "7":
                     String msg_n_seg = "";
                     msg_n_seg += "[BEM VINDO A TELA DE NUMERO DE SEGUIDORES]\n";
                     msg_n_seg += "Digite o nome do usuario:";
@@ -250,7 +252,7 @@ public class MyTwitter implements ITwitter{
                     }
                     
                     break;
-                case 8:
+                case "8":
                     String msg_nome_seg = "";
                     msg_nome_seg += "[BEM VINDO A TELA DE SEGUIDORES]\n";
                     msg_nome_seg += "Digite o nome do usuario:";
@@ -270,7 +272,7 @@ public class MyTwitter implements ITwitter{
                     }
                     
                     break;
-                case 9:
+                case "9":
                     String msg_src = "";
                     msg_src += "[BEM VINDO A TELA DE BUSCA]\n";
                     msg_src += "Digite o nome do usuario para buscar seus dados:";
