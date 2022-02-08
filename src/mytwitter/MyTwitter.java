@@ -13,7 +13,7 @@ import view.*;
 public class MyTwitter implements ITwitter{
 
     
-    private IRepositorioUsuario repositorio;
+    public IRepositorioUsuario repositorio;
     
     public static void main(String[] args) {
         
@@ -80,8 +80,7 @@ public class MyTwitter implements ITwitter{
                         long cpf = Long.parseLong(JOptionPane.showInputDialog(null, "POR FAVOR DIGITE O CPF DE: " 
                                                                                     + nome.toUpperCase()));
                             
-                        PessoaFisica p = new PessoaFisica(nome);
-                        p.setCpf(cpf);
+                        PessoaFisica p = new PessoaFisica(nome, cpf);
                             //Mensagem de mostragem de dados
                             String mensagem_cpf = "=================== \n";
                             mensagem_cpf += "PERFIL: \n" + "NOME: " + p.getUsuario() + "\nCPF: " + p.getCpf();
@@ -106,8 +105,7 @@ public class MyTwitter implements ITwitter{
                             String nome = JOptionPane.showInputDialog(null, "POR FAVOR DIGITE UM NOME PARA O PERFIL");
                             long cnpj = Long.parseLong(JOptionPane.showInputDialog(null, "POR FAVOR DIGITE O CNPJ DE: " 
                                                                                     + nome.toUpperCase()));
-                            PessoaJuridica p = new PessoaJuridica(nome);
-                            p.setCnpj(cnpj);
+                            PessoaJuridica p = new PessoaJuridica(nome, cnpj);
                             
                             //Mensagem de mostragem de dados
                             String mensagem_cnpj = "=================== \n";
@@ -169,7 +167,6 @@ public class MyTwitter implements ITwitter{
                     }catch(PIException | MFPException e){
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
-
 
                     break;
                 case "4":
