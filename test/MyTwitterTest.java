@@ -2,12 +2,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
+import java.util.Vector;
+
 import org.junit.Test;
 
 import mytwitter.MyTwitter;
 import mytwitter.PessoaFisica;
 import mytwitter.PessoaJuridica;
 import mytwitter.RepositorioUsuario;
+import mytwitter.Tweet;
 
 public class MyTwitterTest {
 
@@ -37,7 +40,7 @@ public class MyTwitterTest {
 	
 	@Test
 	public void testCriarPerfil3() {
-		//Test Exception
+		//Test Exception - Perfil já existe
 		RepositorioUsuario rep = new RepositorioUsuario();
 		MyTwitter mt = new MyTwitter(rep);
 		PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
@@ -72,17 +75,63 @@ public class MyTwitterTest {
 
 	@Test
 	public void testTweetar() {
-		fail("Not yet implemented");
+		RepositorioUsuario rep = new RepositorioUsuario();
+		MyTwitter mt = new MyTwitter(rep);
+		PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
+		mt.criarPerfil(pf);
+		mt.tweetar("Italo Ramillys", "Test");
+
+		assertEquals(1, mt.tweets("Italo Ramillys").size());
 	}
 
 	@Test
 	public void testTimeline() {
-		fail("Not yet implemented");
+		RepositorioUsuario rep = new RepositorioUsuario();
+		MyTwitter mt = new MyTwitter(rep);
+		PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
+		mt.criarPerfil(pf);
+		PessoaFisica pf2 = new PessoaFisica("Lincoln Rocha", 92183423123l);
+		mt.criarPerfil(pf2);
+		
+		mt.seguir("Italo Ramillys", "Lincoln Rocha");
+
+		mt.tweetar("Italo Ramillys", "Olá mundo");
+		mt.tweetar("Lincoln Rocha", "Técnicas de programação é muito SHOW");
+
+		assertEquals(2, mt.timeline("Italo Ramillys").size());
+	}
+
+	@Test
+	public void testTimeline2() {
+		//Test Exception - Perfil Inexistente
+		RepositorioUsuario rep = new RepositorioUsuario();
+		MyTwitter mt = new MyTwitter(rep);
+		PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
+		mt.criarPerfil(pf);
+		PessoaFisica pf2 = new PessoaFisica("Lincoln Rocha", 92183423123l);
+		mt.criarPerfil(pf2);
+		
+		mt.seguir("Italo Ramillys", "Lincoln Rocha");
+
+		mt.tweetar("Pedro Silva", "Olá mundo");
+		mt.tweetar("Lincoln Rocha", "Técnicas de programação é muito SHOW");
+
+		assertEquals(2, mt.timeline("Italo Ramillys").size());
 	}
 
 	@Test
 	public void testTweets() {
-		fail("Not yet implemented");
+		RepositorioUsuario rep = new RepositorioUsuario();
+		MyTwitter mt = new MyTwitter(rep);
+		PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
+		mt.criarPerfil(pf);
+		mt.tweetar("Italo Ramillys", "Amo programar");
+		
+		Vector<Tweet> vecT = new Vector<Tweet>();
+		vecT = mt.tweets("Italo Ramillys");
+
+		
+		assertEquals("Amo programar", vecT.get(0).getMensagem());
 	}
 
 	@Test

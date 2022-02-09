@@ -12,28 +12,20 @@ import view.*;
 
 public class MyTwitter implements ITwitter{
 
-    
     public IRepositorioUsuario repositorio;
     
     public static void main(String[] args) {
-        
-        //Tela tela = new Tela();
-        //tela.setVisible(true);
-        
-        
+
         RepositorioUsuario rep = new RepositorioUsuario();
         MyTwitter novo_twitter = new MyTwitter(rep); 
         
         Scanner scan = new Scanner(System.in);
         
-        //String de alerta de retorno
         String msg_return = "Retornando ao menu principal";
         
         boolean execute = true;        
-        //Laço de execução do MyTwitter
         while(execute){
             
-            //String para apresentar o menu
             String menu = "";
             menu += "\n [Bem vindo ao MyTWITTER]";
             menu += "\n [MENU PRINCIPAL] ";
@@ -63,7 +55,6 @@ public class MyTwitter implements ITwitter{
 	                System.exit(0);
                 case "1": 
                     
-                    //String para o JOptionPane do cadastro de PessoaFisica
                     String texto_cpf = "[BEM VINDO A TELA DE CADASTRO]\n";
                     texto_cpf += "O USUARIO A SER CADASTRADO POSSUI: \n";
                     texto_cpf += "=================================\n";
