@@ -13,7 +13,7 @@ import view.*;
 public class MyTwitter implements ITwitter{
 
     
-    private IRepositorioUsuario repositorio;
+    public IRepositorioUsuario repositorio;
     
     public static void main(String[] args) {
         
@@ -80,36 +80,33 @@ public class MyTwitter implements ITwitter{
                         long cpf = Long.parseLong(JOptionPane.showInputDialog(null, "POR FAVOR DIGITE O CPF DE: " 
                                                                                     + nome.toUpperCase()));
                             
-                        PessoaFisica p = new PessoaFisica(nome);
-                        p.setCpf(cpf);
-                            //Mensagem de mostragem de dados
-                            String mensagem_cpf = "=================== \n";
-                            mensagem_cpf += "PERFIL: \n" + "NOME: " + p.getUsuario() + "\nCPF: " + p.getCpf();
-                            mensagem_cpf += "\n ===================";
-                            mensagem_cpf += "\nOs dados estão corretos?";
-                            
-                            int a = JOptionPane.showConfirmDialog(null, mensagem_cpf, "Perfil", 0, 1);
-                            if(a == 0){
-                                    try{
-                                        novo_twitter.criarPerfil(p);
-                                    }catch(PEException e){
-                                        JOptionPane.showMessageDialog(null,e.getMessage());
-                                        break;
-                                    }
-                                    JOptionPane.showMessageDialog(null, "Perfil criado");
-                            }
-                            else{
-                                JOptionPane.showMessageDialog(null,"Opção inválida\n" + msg_return);
-                            }
+                        PessoaFisica p = new PessoaFisica(nome, cpf);
+                        
+                        String mensagem_cpf = "=================== \n";
+                        mensagem_cpf += "PERFIL: \n" + "NOME: " + p.getUsuario() + "\nCPF: " + p.getCpf();
+                        mensagem_cpf += "\n ===================";
+                        mensagem_cpf += "\nOs dados estão corretos?";
+                        
+                        int a = JOptionPane.showConfirmDialog(null, mensagem_cpf, "Perfil", 0, 1);
+                        if(a == 0){
+                                try{
+                                    novo_twitter.criarPerfil(p);
+                                }catch(PEException e){
+                                    JOptionPane.showMessageDialog(null,e.getMessage());
+                                    break;
+                                }
+                                JOptionPane.showMessageDialog(null, "Perfil criado");
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"Opção inválida\n" + msg_return);
+                        }
                     }
                     else if(op1.equals("2")){    
                             String nome = JOptionPane.showInputDialog(null, "POR FAVOR DIGITE UM NOME PARA O PERFIL");
                             long cnpj = Long.parseLong(JOptionPane.showInputDialog(null, "POR FAVOR DIGITE O CNPJ DE: " 
                                                                                     + nome.toUpperCase()));
-                            PessoaJuridica p = new PessoaJuridica(nome);
-                            p.setCnpj(cnpj);
+                            PessoaJuridica p = new PessoaJuridica(nome, cnpj);
                             
-                            //Mensagem de mostragem de dados
                             String mensagem_cnpj = "=================== \n";
                             mensagem_cnpj += "PERFIL: \n" + "NOME: " + p.getUsuario() + "\nCNPJ: " + p.getCnpj();
                             mensagem_cnpj += "\n ===================";
@@ -170,7 +167,6 @@ public class MyTwitter implements ITwitter{
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
 
-
                     break;
                 case "4":
                     String msg_timeline = "";
@@ -189,7 +185,6 @@ public class MyTwitter implements ITwitter{
                             all_tweets += "[" + tweet.getMensagem() + "]" + "\n";
                         }
                        JOptionPane.showMessageDialog(null, all_tweets);
-                       
                     }catch(PIException | PDException e){
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
