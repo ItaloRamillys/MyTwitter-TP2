@@ -1,11 +1,14 @@
 package mytwitter;
-import exceptions.*;
-import java.awt.JobAttributes;
 import java.util.Vector;
-import java.util.Scanner;
-import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
-import view.*;
+
+import exceptions.MFPException;
+import exceptions.PDException;
+import exceptions.PEException;
+import exceptions.PIException;
+import exceptions.SIException;
+import exceptions.UJCException;
 /*
 @Italo Ramillys
 */
@@ -13,19 +16,17 @@ import view.*;
 public class MyTwitter implements ITwitter{
 
     public IRepositorioUsuario repositorio;
-    
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+    	
         RepositorioUsuario rep = new RepositorioUsuario();
         MyTwitter novo_twitter = new MyTwitter(rep); 
-        
-        Scanner scan = new Scanner(System.in);
-        
+
         String msg_return = "Retornando ao menu principal";
-        
+
         boolean execute = true;        
         while(execute){
-            
+
             String menu = "";
             menu += "\n [Bem vindo ao MyTWITTER]";
             menu += "\n [MENU PRINCIPAL] ";
@@ -154,6 +155,7 @@ public class MyTwitter implements ITwitter{
 
                     try{
                         novo_twitter.tweetar(nome_usu, msg_usu);
+                        JOptionPane.showMessageDialog(null, "Tweet criado");
                     }catch(PIException | MFPException e){
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
@@ -377,13 +379,10 @@ public class MyTwitter implements ITwitter{
         
         t = repositorio.buscar(seguido).getTimeline();
         
-        int i = 0;
         for (Tweet tweet : t) {
-            repositorio.buscar(seguidor).addTweet(t.get(i));
-            i++;
+            repositorio.buscar(seguidor).addTweet(tweet);
         }
     }
-
 
     @Override
     public int numeroSeguidores(String usuario) {
