@@ -14,7 +14,6 @@ public abstract class Perfil {
     }
     public void setUsuario(String usuario){
         this.usuario = usuario;
-     
     }
     public String getUsuario(){   
         return usuario;
@@ -41,11 +40,9 @@ public abstract class Perfil {
     public String toString() {
         String txt_timeline = "";
         for (Tweet tweets : timeline) {
-            txt_timeline += tweets.getMensagem() + "\n";
+            txt_timeline += "[("+ tweets.getUsuario() + ") -> " + tweets.getMensagem() + "]\n";
         }
         
         return "Perfil: " + "\n Usuario= \n" + usuario + "\n Seguidores= \n" + seguidores + "\n Timeline= \n" + txt_timeline + "\n Ativo= \n" + ativo + '}';
     }
-    
-    
 }
