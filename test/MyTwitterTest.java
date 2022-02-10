@@ -40,15 +40,20 @@ public class MyTwitterTest {
 	
 	@Test
 	public void testCriarPerfil3() {
-		//Test Exception - Perfil já existe
-		RepositorioUsuario rep = new RepositorioUsuario();
-		MyTwitter mt = new MyTwitter(rep);
-		PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
-		mt.criarPerfil(pf);
-		PessoaFisica pf2 = new PessoaFisica("Italo Ramillys", 92183499123l);
-		mt.criarPerfil(pf2);
+		try {
+			RepositorioUsuario rep = new RepositorioUsuario();
+			MyTwitter mt = new MyTwitter(rep);
+			PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
+			mt.criarPerfil(pf);
+			PessoaFisica pf2 = new PessoaFisica("Italo Ramillys", 92183499123l);
+			mt.criarPerfil(pf2);
 
-		PessoaFisica pfT = (PessoaFisica)mt.repositorio.buscar("Italo Ramillys");
+			PessoaFisica pfT = (PessoaFisica)mt.repositorio.buscar("Italo Ramillys");
+	    } 
+	    catch (Exception e) {
+	        final String expected = "Perfil já existente!";
+	        assertEquals( expected, e.getMessage());
+	    } 
 	}
 
 	@Test
@@ -103,20 +108,25 @@ public class MyTwitterTest {
 
 	@Test
 	public void testTimeline2() {
-		//Test Exception - Perfil Inexistente
-		RepositorioUsuario rep = new RepositorioUsuario();
-		MyTwitter mt = new MyTwitter(rep);
-		PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
-		mt.criarPerfil(pf);
-		PessoaFisica pf2 = new PessoaFisica("Lincoln Rocha", 92183423123l);
-		mt.criarPerfil(pf2);
-		
-		mt.seguir("Italo Ramillys", "Lincoln Rocha");
+		try {
+			//Test Exception - Perfil Inexistente
+			RepositorioUsuario rep = new RepositorioUsuario();
+			MyTwitter mt = new MyTwitter(rep);
+			PessoaFisica pf = new PessoaFisica("Italo Ramillys", 92183499123l);
+			mt.criarPerfil(pf);
+			PessoaFisica pf2 = new PessoaFisica("Lincoln Rocha", 92183423123l);
+			mt.criarPerfil(pf2);
+			
+			mt.seguir("Italo Ramillys", "Lincoln Rocha");
 
-		mt.tweetar("Pedro Silva", "Olá mundo");
-		mt.tweetar("Lincoln Rocha", "Técnicas de programação é muito SHOW");
-
-		assertEquals(2, mt.timeline("Italo Ramillys").size());
+			mt.tweetar("Pedro Silva", "Olá mundo");
+			mt.tweetar("Lincoln Rocha", "Técnicas de programação é muito SHOW");
+	    } 
+	    catch (Exception e) {
+	        final String expected = "Perfil Inexistente!";
+	        assertEquals( expected, e.getMessage());
+	    } 
+	
 	}
 
 	@Test
